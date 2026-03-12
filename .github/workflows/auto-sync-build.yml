@@ -52,7 +52,7 @@ jobs:
           # 调用 Docker Hub API 查询镜像是否存在
           HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://hub.docker.com/v2/repositories/$USERNAME/daily_stock_analysis/tags/$TAG/")
           
-          if[ "$HTTP_STATUS" == "200" ]; then
+          if [ "$HTTP_STATUS" == "200" ]; then
             echo "🚀 镜像 $USERNAME/daily_stock_analysis:$TAG 已经存在，无需重新打包。"
             echo "skip_build=true" >> $GITHUB_OUTPUT
           else
@@ -93,3 +93,4 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/daily_stock_analysis:${{ steps.get_tag.outputs.latest_tag }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
